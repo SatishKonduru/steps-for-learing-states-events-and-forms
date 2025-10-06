@@ -8,6 +8,16 @@ const messages = [
 ];
 
 export default function App() {
+  return (
+    <div>
+      <Steps />
+      <Steps />
+      <Steps />
+    </div>
+  );
+}
+
+function Steps() {
   // const step = 1;
   // Managing States => Create -> Use -> Update
   // useState() should NOT use ->
@@ -15,35 +25,51 @@ export default function App() {
   // inside of any other function
   // inside of any LOOP
   const [step, setStep] = useState(1);
+  const [isOpen, setIsOpen] = useState(true);
+
   function handlePrevious() {
-    console.log("Step Value : ", step);
-    if (step > 1) setStep(step - 1);
+    // console.log("Step Value : ", step);
+    if (step > 1) setStep((currentStep) => currentStep - 1);
     // step = step - 1;
   }
 
   function handleNext() {
-    console.log("Step Value : ", step);
-    if (step < 3) setStep(step + 1);
+    // console.log("Step Value : ", step);
+    if (step < 3) setStep((currentStep) => currentStep + 1);
+
     // step = step + 1;
   }
   return (
-    <div className="steps">
-      <div className="numbers">
-        <div className={step >= 1 ? "active" : ""}>1</div>
-        <div className={step >= 2 ? "active" : ""}>2</div>
-        <div className={step >= 3 ? "active" : ""}>3</div>
-      </div>
-      <div className="message">
-        Step {step} : {messages[step - 1]}
-      </div>
-      <div className="buttons">
-        <button style={{ backgroundColor: "#7950f2" }} onClick={handlePrevious}>
-          Previous
-        </button>
-        <button style={{ backgroundColor: "#7950f2" }} onClick={handleNext}>
-          Next
-        </button>
-      </div>
+    <div>
+      <button
+        className="close"
+        onClick={() => setIsOpen((currentIsOpen) => !currentIsOpen)}
+      >
+        &times;
+      </button>
+      {isOpen && (
+        <div className="steps">
+          <div className="numbers">
+            <div className={step >= 1 ? "active" : ""}>1</div>
+            <div className={step >= 2 ? "active" : ""}>2</div>
+            <div className={step >= 3 ? "active" : ""}>3</div>
+          </div>
+          <div className="message">
+            Step {step} : {messages[step - 1]}
+          </div>
+          <div className="buttons">
+            <button
+              style={{ backgroundColor: "#7950f2" }}
+              onClick={handlePrevious}
+            >
+              Previous
+            </button>
+            <button style={{ backgroundColor: "#7950f2" }} onClick={handleNext}>
+              Next
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

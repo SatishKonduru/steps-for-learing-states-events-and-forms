@@ -60,4 +60,16 @@ body{
   align-items: center;
   gap: 10px */
 }
-
+.close{
+  /* position: absolute; */
+  top: 16px;
+  right: 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+color: inherit;
+font-size: 40px;
+}
+.close:hover{
+  color: #7950f3
+}
